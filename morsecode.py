@@ -280,14 +280,19 @@ def decoding_sentence(morse_sentence):
     result = []
     if '  ' in morse_sentence:
         morse_sentence = morse_sentence.split('  ')
+        morse_sentence = [i.split() for i in morse_sentence]
+        for i in morse_sentence:
+            sub = []
+            for j in i:
+                sub.append(decoding_character(j))
+            result.append(''.join(sub))
+        result = ' '.join(result)
+    else:
+        morse_sentence = morse_sentence.split()
+        for i in morse_sentence:
+            result.append(decoding_character(i))
+        result = ''.join(result)
 
-    morse_sentence = [i.split() if ' ' in i else i for i in morse_sentence]
-    for i in morse_sentence:
-        sub = []
-        for j in i:
-            sub.append(decoding_character(j))
-        result.append(''.join(sub))
-    result = ' '.join(result)
     return result
     # ==================================
 
@@ -330,18 +335,15 @@ def trans(user_input):
     if user_input == '0':
         return 1
     elif is_help_command(user_input):
-        print(1)
         print(get_help_message())
         user_input = input("Input your message(H - Help, 0 - Exit):")
         trans(user_input)
     elif is_validated_english_sentence(user_input):
-        print(2)
         output = encoding_sentence(user_input)
         print(output)
         user_input = input("Input your message(H - Help, 0 - Exit):")
         trans(user_input)
     elif is_validated_morse_code(user_input):
-        print(3)
         output = decoding_sentence(user_input)
         print(output)
         user_input = input("Input your message(H - Help, 0 - Exit):")
