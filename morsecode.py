@@ -317,16 +317,22 @@ def encoding_sentence(english_sentence):
     """
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
+
     result = []
     english_sentence = get_cleaned_english_sentence(english_sentence.upper())
+
     if ' ' in english_sentence:
         english_sentence = english_sentence.split()
-    for eng in english_sentence:
-        sub = []
-        for j in eng:
-            sub.append(encoding_character(j))
-        result.append(' '.join(sub))
-    result = '  '.join(result)
+        for i in english_sentence:
+            sub = []
+            for j in i:
+                sub.append(encoding_character(j))
+            result.append(' '.join(sub))
+        result = '  '.join(result)
+    else:
+        for i in english_sentence:
+            result.append(encoding_character(i))
+        result = ' '.join(result)
     return result
     # ==================================
 
