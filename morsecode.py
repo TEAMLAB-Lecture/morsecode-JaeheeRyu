@@ -313,7 +313,6 @@ def encoding_sentence(english_sentence):
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
     result = []
-    print(english_sentence)
     english_sentence = get_cleaned_english_sentence(english_sentence.upper())
     if ' ' in english_sentence:
         english_sentence = english_sentence.split()
@@ -321,8 +320,8 @@ def encoding_sentence(english_sentence):
         sub = []
         for j in eng:
             sub.append(encoding_character(j))
-        result.append(''.join(sub))
-    result = ' '.join(result)
+        result.append(' '.join(sub))
+    result = '  '.join(result)
     return result
     # ==================================
 
@@ -331,15 +330,18 @@ def trans(user_input):
     if user_input == '0':
         return 1
     elif is_help_command(user_input):
+        print(1)
         print(get_help_message())
         user_input = input("Input your message(H - Help, 0 - Exit):")
         trans(user_input)
     elif is_validated_english_sentence(user_input):
+        print(2)
         output = encoding_sentence(user_input)
         print(output)
         user_input = input("Input your message(H - Help, 0 - Exit):")
         trans(user_input)
     elif is_validated_morse_code(user_input):
+        print(3)
         output = decoding_sentence(user_input)
         print(output)
         user_input = input("Input your message(H - Help, 0 - Exit):")
